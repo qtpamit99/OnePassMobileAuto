@@ -1,0 +1,4 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","60982","should login, add items to cart, and complete purchase","firefox","Sun May 18 21:35:56 IST 2025","broken","Sun May 18 21:36:57 IST 2025","Demoblaze Purchase Flow","purchaseFlow.spec.js","",""
+"","41172","should login, add items to cart, and complete purchase","chromium","Sun May 18 21:32:00 IST 2025","passed","Sun May 18 21:32:42 IST 2025","Demoblaze Purchase Flow","purchaseFlow.spec.js","",""
+"","14389","should login, add items to cart, and complete purchase","webkit","Sun May 18 21:34:33 IST 2025","failed","Sun May 18 21:34:48 IST 2025","Demoblaze Purchase Flow","purchaseFlow.spec.js","",""

@@ -1,0 +1,21 @@
+{
+  "userCredentials": {
+    "username": "pavanol",
+    "password": "test@123"
+  },
+  "items": [
+    "Samsung galaxy s6",
+    "Nokia lumia 1520",
+    "HTC One M9",
+    "Sony vaio i5",
+    "Sony xperia z5"
+  ],
+  "purchaseDetails": {
+    "name": "Pavan Kumar",
+    "country": "India",
+    "city": "Bangalore",
+    "card": "1234567890123456",
+    "month": "12",
+    "year": "2025"
+  }
+}
