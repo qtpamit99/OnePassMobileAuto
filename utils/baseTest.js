@@ -4,7 +4,8 @@ class BaseTest {
   }
 
   async navigateTo(url) {
-    await this.page.goto(url);
+    console.log(`Navigating to: ${url}`);
+    await this.page.goto(url, { waitUntil: 'load' });
   }
 }
 

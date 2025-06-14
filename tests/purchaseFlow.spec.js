@@ -4,25 +4,24 @@ const { LoginPage } = require('../pages/LoginPage');
 const { HomePage } = require('../pages/HomePage');
 const { CartPage } = require('../pages/CartPage');
 const { OrderPage } = require('../pages/OrderPage');
+const { ConfigLoader } = require('../utils/configLoader');
 const testData = require('../test-data/testData.json');
-const config = require('../config/config.json'); 
 
 test.describe('Demoblaze Purchase Flow', () => {
-  test('should login, add items to cart, and complete purchase @smoke @regression', async ({ page, baseURL }) => {
+  test('should login, add items to cart, and complete purchase @smoke @regression', async ({ page }) => {
+    const config = ConfigLoader.getConfig(); // Load environment-specific config
     const baseTest = new BaseTest(page);
     const loginPage = new LoginPage(page);
     const homePage = new HomePage(page);
     const cartPage = new CartPage(page);
     const orderPage = new OrderPage(page);
 
-    // Navigate to homepage from globle baseURL (playwright.config.js)
-    //await baseTest.navigateTo(baseURL);
-      // Navigate to homepage using baseUrl from config.json
+    // Navigate to homepage using baseUrl from config
     await baseTest.navigateTo(config.baseUrl);
 
     // Login
-    await loginPage.login(testData.userCredentials.username, testData.userCredentials.password);
-    await expect(await loginPage.getWelcomeText()).toContain(testData.userCredentials.username);
+    await loginPage.login(config.credentials.username, config.credentials.password);
+    await expect(await loginPage.getWelcomeText()).toContain(config.credentials.username);
 
     // Add items to cart
     for (const item of testData.items) {

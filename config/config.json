@@ -1,4 +1,29 @@
 {
- "baseUrl": "https://www.demoblaze.com/index.html",
-  "timeout": 30000
+  "environments": {
+    "qa": {
+      "baseUrl": "https://www.demoblaze.com/index.html",
+      "timeout": 30000,
+      "credentials": {
+        "username": "pavanol",
+        "password": "test@123"
+      }
+    },
+    "stag": {
+      "baseUrl": "https://www.demoblaze.com/index.html",
+      "timeout": 30000,
+      "credentials": {
+        "username": "pavanol",
+        "password": "test@123"
+      }
+    },
+    "prod": {
+      "baseUrl": "https://www.demoblaze.com/index.html",
+      "timeout": 30000,
+      "credentials": {
+        "username": "pavanol",
+        "password": "test@123"
+      }
+    }
+  },
+  "defaultEnv": "qa"
 }

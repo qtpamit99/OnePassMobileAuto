@@ -1,3 +1,5 @@
+const { ConfigLoader } = require('../utils/configLoader');
+
 class CartPage {
   constructor(page) {
     this.page = page;
@@ -7,8 +9,9 @@ class CartPage {
   }
 
   async navigateToCart() {
+    const config = ConfigLoader.getConfig();
     await this.page.click(this.cartLink);
-    await this.page.waitForSelector(this.cartTable);
+    await this.page.waitForSelector(this.cartTable, { timeout: config.timeout });
   }
 
   async getCartItems() {

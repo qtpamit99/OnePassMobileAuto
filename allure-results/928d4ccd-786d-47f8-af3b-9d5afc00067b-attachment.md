@@ -1,0 +1,125 @@
+# Test info
+
+- Name: Demoblaze Purchase Flow >> should login, add items to cart, and complete purchase @smoke @regression
+- Location: C:\Users\Amitu\OneDrive\Desktop\Playwright_Framework\OnePassMobileAuto\tests\purchaseFlow.spec.js:11:3
+
+# Error details
+
+```
+Error: page.waitForSelector: Test timeout of 60000ms exceeded.
+Call log:
+  - waiting for locator('h2.name') to be visible
+
+    at HomePage.addItemToCart (C:\Users\Amitu\OneDrive\Desktop\Playwright_Framework\OnePassMobileAuto\pages\HomePage.js:38:21)
+    at C:\Users\Amitu\OneDrive\Desktop\Playwright_Framework\OnePassMobileAuto\tests\purchaseFlow.spec.js:28:7
+```
+
+# Page snapshot
+
+```yaml
+- navigation:
+  - link "PRODUCT STORE":
+    - /url: index.html
+    - img
+    - text: PRODUCT STORE
+  - list:
+    - listitem:
+      - link "Home (current)":
+        - /url: index.html
+    - listitem:
+      - link "Contact":
+        - /url: "#"
+    - listitem:
+      - link "About us":
+        - /url: "#"
+    - listitem:
+      - link "Cart":
+        - /url: cart.html
+    - listitem:
+      - link "Log in":
+        - /url: "#"
+    - listitem
+    - listitem
+    - listitem:
+      - link "Sign up":
+        - /url: "#"
+- list:
+  - listitem
+  - listitem
+  - listitem
+- link:
+  - /url: "#myCarousel-2"
+- link:
+  - /url: "#myCarousel-2"
+```
+
+# Test source
+
+```ts
+   1 | const { ConfigLoader } = require('../utils/configLoader');
+   2 |
+   3 | class HomePage {
+   4 |   constructor(page) {
+   5 |     this.page = page;
+   6 |     this.productGrid = '.card-title a';
+   7 |     this.nextButton = '#next2';
+   8 |     this.productName = 'h2.name';
+   9 |     this.addToCartButton = 'a[onclick*="addToCart"]';
+  10 |     this.homeLink = 'a.nav-link:has-text("Home")';
+  11 |     this.categoryLink = 'a.list-group-item';
+  12 |     this.visibleProducts = '.card-title a';
+  13 |   }
+  14 |
+  15 |   async addItemToCart(item) {
+  16 |     const config = ConfigLoader.getConfig();
+  17 |     let itemFound = false;
+  18 |
+  19 |     while (!itemFound) {
+  20 |       await this.page.waitForSelector(this.productGrid, { timeout: config.timeout });
+  21 |       const itemLocator = this.page.locator(`.card-title a:has-text("${item}")`);
+  22 |       const itemCount = await itemLocator.count();
+  23 |
+  24 |       if (itemCount > 0) {
+  25 |         await itemLocator.first().click();
+  26 |         itemFound = true;
+  27 |       } else {
+  28 |         const nextButtonVisible = await this.page.locator(this.nextButton).isVisible();
+  29 |         if (nextButtonVisible) {
+  30 |           await this.page.locator(this.nextButton).click();
+  31 |           await this.page.waitForTimeout(2000); // Replace with dynamic wait if needed
+  32 |         } else {
+  33 |           throw new Error(`Item "${item}" not found on any page`);
+  34 |         }
+  35 |       }
+  36 |     }
+  37 |
+> 38 |     await this.page.waitForSelector(this.productName, { timeout: config.timeout });
+     |                     ^ Error: page.waitForSelector: Test timeout of 60000ms exceeded.
+  39 |     this.page.once('dialog', async dialog => {
+  40 |       await dialog.accept();
+  41 |     });
+  42 |     await this.page.click(this.addToCartButton);
+  43 |     await this.page.waitForTimeout(2000); // Replace with dynamic wait if needed
+  44 |     await this.page.click(this.homeLink);
+  45 |     await this.page.waitForTimeout(2000); // Replace with dynamic wait if needed
+  46 |   }
+  47 |
+  48 |   async selectCategory(category) {
+  49 |     const config = ConfigLoader.getConfig();
+  50 |     const categoryLocator = this.page.locator(`${this.categoryLink}:has-text("${category}")`);
+  51 |     await categoryLocator.click();
+  52 |     await this.page.waitForTimeout(2000); // Replace with dynamic wait if needed
+  53 |   }
+  54 |
+  55 |   async getVisibleProducts() {
+  56 |     const config = ConfigLoader.getConfig();
+  57 |     await this.page.waitForSelector(this.visibleProducts, { timeout: config.timeout });
+  58 |     const products = await this.page.$$eval(this.visibleProducts, elements => 
+  59 |       elements.map(element => element.textContent.trim())
+  60 |     );
+  61 |     return products;
+  62 |   }
+  63 | }
+  64 |
+  65 | module.exports = { HomePage };
+```

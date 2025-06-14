@@ -1,3 +1,5 @@
+const { ConfigLoader } = require('../utils/configLoader');
+
 class LoginPage {
   constructor(page) {
     this.page = page;
@@ -11,12 +13,13 @@ class LoginPage {
   }
 
   async login(username, password) {
+    const config = ConfigLoader.getConfig();
     await this.page.click(this.loginLink);
-    await this.page.waitForSelector(this.loginModal, { state: 'visible' });
+    await this.page.waitForSelector(this.loginModal, { state: 'visible', timeout: config.timeout });
     await this.page.fill(this.usernameField, username);
     await this.page.fill(this.passwordField, password);
     await this.page.click(this.loginButton);
-    await this.page.waitForSelector(this.welcomeText, { state: 'visible' });
+    await this.page.waitForSelector(this.welcomeText, { state: 'visible', timeout: config.timeout });
   }
 
   async getWelcomeText() {
