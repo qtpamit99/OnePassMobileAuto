@@ -5,17 +5,20 @@ const { HomePage } = require('../pages/HomePage');
 const { CartPage } = require('../pages/CartPage');
 const { OrderPage } = require('../pages/OrderPage');
 const testData = require('../test-data/testData.json');
+const config = require('../config/config.json'); 
 
 test.describe('Demoblaze Purchase Flow', () => {
-  test('should login, add items to cart, and complete purchase', async ({ page, baseURL }) => {
+  test('should login, add items to cart, and complete purchase @smoke @regression', async ({ page, baseURL }) => {
     const baseTest = new BaseTest(page);
     const loginPage = new LoginPage(page);
     const homePage = new HomePage(page);
     const cartPage = new CartPage(page);
     const orderPage = new OrderPage(page);
 
-    // Navigate to homepage
-    await baseTest.navigateTo(baseURL);
+    // Navigate to homepage from globle baseURL (playwright.config.js)
+    //await baseTest.navigateTo(baseURL);
+      // Navigate to homepage using baseUrl from config.json
+    await baseTest.navigateTo(config.baseUrl);
 
     // Login
     await loginPage.login(testData.userCredentials.username, testData.userCredentials.password);

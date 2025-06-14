@@ -17,5 +17,14 @@
     "card": "1234567890123456",
     "month": "12",
     "year": "2025"
+  },
+  "categoryFilter": {
+    "category": "Laptops",
+    "expectedProducts": [
+      "Sony vaio i5",
+      "Dell i7 8gb",
+      "2017 Dell 15.6 Inch"
+    ],
+    "productToAdd": "Sony vaio i5"
   }
 }
