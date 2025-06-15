@@ -26,7 +26,8 @@
     "test:prod:smoke:all:headed": "cross-env ENV=prod playwright test --project=Smoke --project=SmokeFirefox --project=SmokeWebkit --headed",
     "test:prod:regression:chrome:headed": "cross-env ENV=prod playwright test --project=Regression --headed",
     "test:prod:regression:firefox:headed": "cross-env ENV=prod playwright test --project=RegressionFirefox --headed",
-    "test:prod:regression:webkit:headed": "cross-env ENV=prod playwright test --project=RegressionWebkit --headed"
+    "test:prod:regression:webkit:headed": "cross-env ENV=prod playwright test --project=RegressionWebkit --headed",
+    "test:qa:smoke:chrome:headless": "cross-env ENV=qa playwright test --project=Smoke"
   },
   "keywords": [],
   "author": "Amit Kumar Singh",
