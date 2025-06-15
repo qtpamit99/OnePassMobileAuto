@@ -8,7 +8,7 @@ const config = {
   reporter: [
     ['html', { outputFolder: 'reports/html-report' }],
     ['list'],
-    ['allure-playwright']
+   ['allure-playwright', { outputFolder: 'allure-results' }]
   ],
   use: {
     screenshot: 'on-failure',
