@@ -36,6 +36,7 @@
     "@playwright/test": "^1.52.0",
     "@types/node": "^22.15.18",
     "allure-playwright": "^3.2.2",
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "http-server": "^14.1.1"
   }
 }
