@@ -6,9 +6,11 @@ const config = {
   retries: 3,
   workers: 2,
   reporter: [
-    ['html', { outputFolder: 'reports/html-report' }],
-    ['list'],
-   ['allure-playwright', { outputFolder: 'allure-results' }]
+    ['list'], // Console output
+    ['html', { 
+      outputFolder: 'playwright-report',
+      open: 'never' // Disable auto-opening
+    }]
   ],
   use: {
     screenshot: 'on-failure',
